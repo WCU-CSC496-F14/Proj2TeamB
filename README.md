@@ -9,8 +9,15 @@ I downloaded the platform example, but I anticipate changing all of the graphics
 here's a link to the tutorial for how to add music.
 http://www.html5quintus.com/guide/sound.md
 
-I also believe we need to add animation, which means multiple frames for our sprites, but if we can keep it to one sprite sheet, I think that'll make things easier since that's what
-we did in the last project. 
+Kelsey will handle the JSON level files. ( need two levels that take at least 60 seconds to traverse)
+Chris is on sprites,(make things pretty)
+David will do audio( lazer sounds pew pew)
 
-Kelsey, We've kind of agreed that you can make all of the feature/graphical decisions, which I think suits you because you enjoy being creative.
-I'm really pushing to get a fuckin' A on this because my grades in this course so far have been less than stellar, so let's get our heads in the game and kick ass. -David
+
+
+Tasks to do:
+
+Sprites move Quintus animamtions
+Start Screen
+Game-Over screen
+some indication of a game state (number of lives left, a timer, number of points.) something to indicate progression.
