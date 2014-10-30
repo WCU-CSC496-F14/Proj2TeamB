@@ -172,6 +172,9 @@ Q.scene('title',function(stage) {
   // Expand the container to visibily fit it's contents
   // (with a padding of 20 pixels)
   container.fit(20);
+  
+  stage.add("viewport").centerOn(0,0);
+  stage.viewport.scale = 2;
 });
 
 // ## Asset Loading and Game Launch
