@@ -116,6 +116,7 @@ Q.scene("level1",function(stage) {
   // Give the stage a moveable viewport and tell it
   // to follow the player.
   stage.add("viewport").follow(player);
+  stage.viewport.scale = 2;
 
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 700, y: 0 }));
