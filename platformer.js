@@ -173,7 +173,7 @@ Q.scene('title',function(stage) {
   // (with a padding of 20 pixels)
   container.fit(20);
   
-  stage.add("viewport").centerOn(Q.width/2,Q.width/2);
+  stage.add("viewport").follow(container);
   stage.viewport.scale = 2;
 });
 
