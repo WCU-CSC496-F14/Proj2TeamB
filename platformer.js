@@ -151,6 +151,9 @@ Q.scene('endGame',function(stage) {
 });
 
 Q.scene('title',function(stage) {
+  // Add in a repeater for a little parallax action
+  stage.insert(new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 }));
+
   var container = stage.insert(new Q.UI.Container({
     x: Q.width/2, y: Q.height/2, fill: "rgba(0,0,0,0.5)"
   }));
