@@ -30,8 +30,8 @@ Q.Sprite.extend("Player",{
     // You can call the parent's constructor with this._super(..)
     this._super(p, {
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
-      x: 410,           // You can also set additional properties that can
-      y: 90             // be overridden on object creation
+      x: 90,           // You can also set additional properties that can
+      y: 1000             // be overridden on object creation
     });
 
     // Add in pre-made components to get up and running quickly
@@ -102,7 +102,7 @@ Q.Sprite.extend("Enemy",{
 Q.scene("level1",function(stage) {
 
   // Add in a repeater for a little parallax action
-  stage.insert(new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 }));
+  stage.insert(new Q.Repeater({ asset: "cavebackground.jpg", speedX: 0.5, speedY: 0.5 }));
 
   // Add in a tile layer, and make it the collision layer
   stage.collisionLayer(new Q.TileLayer({
@@ -119,11 +119,16 @@ Q.scene("level1",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
-  stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-  stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+  stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
+  stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
+  stage.insert(new Q.Enemy({ x: 600, y: 900 }));
+  stage.insert(new Q.Enemy({ x: 300, y: 950 }));
+  stage.insert(new Q.Enemy({ x: 700, y: 700 }));
+  stage.insert(new Q.Enemy({ x: 600, y: 400 }));
+  stage.insert(new Q.Enemy({ x: 500, y: 700 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Tower({ x: 180, y: 50 }));
+  //stage.insert(new Q.Tower({ x: 180, y: 50 }));
 });
 
 // To display a game over / game won popup box, 
