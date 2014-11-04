@@ -186,9 +186,9 @@ Q.scene('title',function(stage) {
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
-Q.load("sprites.png, sprites.json, level.json, tiles.png, cavebackground.png", function() {
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
   // Sprites sheets can be created manually
-  Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
+  Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
 
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("sprites.png","sprites.json");
