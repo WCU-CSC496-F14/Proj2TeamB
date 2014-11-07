@@ -188,15 +188,14 @@ Q.scene('title',function(stage) {
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", ["Rick-astley.mp3"], function() {
 =======
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
->>>>>>> parent of a425d16... rick-astley
+
 =======
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
->>>>>>> parent of a425d16... rick-astley
+
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
 
