@@ -190,10 +190,10 @@ Q.scene('title',function(stage) {
 // The callback will be triggered when everything is loaded
 
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", ["Rick-astley.mp3"], function() {
-=======
+
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
 
-=======
+
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
 
   // Sprites sheets can be created manually
