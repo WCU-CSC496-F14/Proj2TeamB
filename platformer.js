@@ -13,7 +13,7 @@ window.addEventListener("load",function() {
 // the Sprites, Scenes, Input and 2D module. The 2D module
 // includes the `TileLayer` class as well as the `2d` componet.
 
-var Q = window.Q = Quintus()//{audioSupported: ['mp3']}
+var Q = window.Q = Quintus({ audioSupported: [ 'mp3','ogg' ] })//{audioSupported: ['mp3']}
         .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI, Audio")
 
         // Maximize this game to whatever the size of the browser is
