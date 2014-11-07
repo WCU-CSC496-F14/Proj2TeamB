@@ -193,7 +193,7 @@ Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png,
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
-Q.audio.play("Rick-astley.mp3",{ loop: true });
+//Q.audio.play("Rick-astley.mp3",{ loop: true });
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("sprites.png","sprites.json");
 
