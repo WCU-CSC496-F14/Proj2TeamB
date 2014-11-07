@@ -16,17 +16,10 @@ window.addEventListener("load",function() {
 var Q = window.Q = Quintus({audioSupported: ['mp3']})
         .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI", "Audio")
 
-var Q = window.Q = Quintus()
-        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
-
-
-var Q = window.Q = Quintus()
-        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
-
         // Maximize this game to whatever the size of the browser is
         .setup({ maximize: true })
         // And turn on default input controls and touch input (for UI)
-        .controls().touch()
+        .controls().touch().enableSound();
 
 // ## Player Sprite
 // The very basic player sprite, this is just a normal sprite
