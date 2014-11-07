@@ -13,8 +13,13 @@ window.addEventListener("load",function() {
 // the Sprites, Scenes, Input and 2D module. The 2D module
 // includes the `TileLayer` class as well as the `2d` componet.
 <<<<<<< HEAD
+<<<<<<< HEAD
 var Q = window.Q = Quintus({audioSupported: ['mp3']})
         .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI", "Audio")
+=======
+var Q = window.Q = Quintus()
+        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
+>>>>>>> parent of a425d16... rick-astley
 =======
 var Q = window.Q = Quintus()
         .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
@@ -192,7 +197,11 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 <<<<<<< HEAD
+<<<<<<< HEAD
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", ["Rick-astley.mp3"], function() {
+=======
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
+>>>>>>> parent of a425d16... rick-astley
 =======
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
 >>>>>>> parent of a425d16... rick-astley
