@@ -188,7 +188,6 @@ Q.scene('title',function(stage) {
 // The callback will be triggered when everything is loaded
 Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3", function() {
   // Sprites sheets can be created manually
-  Q.audio.play('Rick-astley.mp3', {loop: true});
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
 
   // Or from a .json asset that defines sprite locations
@@ -197,7 +196,7 @@ Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png,
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
 });
-
+ Q.audio.play('Rick-astley.mp3', {loop: true});
 // ## Possible Experimentations:
 // 
 // The are lots of things to try out here.
