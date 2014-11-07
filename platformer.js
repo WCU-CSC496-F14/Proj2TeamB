@@ -199,7 +199,7 @@ Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png,
 
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
-  //Q.audio.play('Rick-astley.mp3');
+  Q.audio.play('Rick-astley.mp3');
 });
  
 // ## Possible Experimentations:
