@@ -13,13 +13,13 @@ window.addEventListener("load",function() {
 // the Sprites, Scenes, Input and 2D module. The 2D module
 // includes the `TileLayer` class as well as the `2d` componet.
 
-var Q = window.Q = Quintus({audioSupported: ['mp3']})
-        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI", "Audio")
+var Q = window.Q = Quintus()//{audioSupported: ['mp3']}
+        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")//, "Audio"
 
         // Maximize this game to whatever the size of the browser is
         .setup({ maximize: true })
         // And turn on default input controls and touch input (for UI)
-        .controls().touch().enableSound();
+        .controls().touch();//.enableSound()
 
 // ## Player Sprite
 // The very basic player sprite, this is just a normal sprite
@@ -189,12 +189,7 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", ["Rick-astley.mp3"], function() {
-
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
-
-
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
@@ -204,7 +199,7 @@ Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png"
 
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
-  Q.audio.play('Rick-astley.mp3');
+  //Q.audio.play('Rick-astley.mp3');
 });
  
 // ## Possible Experimentations:
