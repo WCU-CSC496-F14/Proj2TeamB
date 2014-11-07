@@ -14,7 +14,7 @@ window.addEventListener("load",function() {
 // includes the `TileLayer` class as well as the `2d` componet.
 
 var Q = window.Q = Quintus()//{audioSupported: ['mp3']}
-        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")//, "Audio"
+        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI, Audio")
 
         // Maximize this game to whatever the size of the browser is
         .setup({ maximize: true })
