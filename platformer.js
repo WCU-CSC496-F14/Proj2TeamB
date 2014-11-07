@@ -12,12 +12,12 @@ window.addEventListener("load",function() {
 // Set up an instance of the Quintus engine  and include
 // the Sprites, Scenes, Input and 2D module. The 2D module
 // includes the `TileLayer` class as well as the `2d` componet.
-var Q = window.Q = Quintus()
-        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
+var Q = window.Q = Quintus({audioSuppported: ['mp3']})
+        .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI, Audio")
         // Maximize this game to whatever the size of the browser is
         .setup({ maximize: true })
         // And turn on default input controls and touch input (for UI)
-        .controls().touch()
+        .controls().touch().enableSound();
 
 // ## Player Sprite
 // The very basic player sprite, this is just a normal sprite
@@ -186,8 +186,9 @@ Q.scene('title',function(stage) {
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png", function() {
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3", function() {
   // Sprites sheets can be created manually
+  Q.audio.play('Rick-astley.mp3', {loop: true});
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
 
   // Or from a .json asset that defines sprite locations
