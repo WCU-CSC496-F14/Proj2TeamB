@@ -189,11 +189,11 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png",  function() {//["Rick-astley.mp3"],
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
-
+Q.audio.play("Rick-astley.mp3",{ loop: true });
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("sprites.png","sprites.json");
 
