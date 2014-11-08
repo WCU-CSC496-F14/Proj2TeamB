@@ -93,6 +93,7 @@ Q.Sprite.extend("Enemy",{
     this.on("bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
         this.destroy();
+        Q.audio.play('killenemy.mp3');
         collision.obj.p.vy = -300;
       }
     });
@@ -189,7 +190,7 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3, killenemy.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
