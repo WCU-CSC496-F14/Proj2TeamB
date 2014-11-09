@@ -95,7 +95,7 @@ Q.Sprite.extend("Player",{
           }
           this.p.direction = "left";
         } else {
-          this.play("stand_right");
+          this.play("stand_" + this.p.direction);
         }
     }
   }
