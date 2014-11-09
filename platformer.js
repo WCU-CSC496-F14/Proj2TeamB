@@ -59,7 +59,7 @@ Q.Sprite.extend("Player",{
 	this.on("jump");
     this.on("jumped");
 
-  }
+  },
   
   jump: function(obj) {
     // Only play sound once.
