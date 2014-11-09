@@ -241,14 +241,14 @@ Q.load("spritesheet.png, spritesheet.json, level.json, newtiles.png, cavebackgro
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet.png","spritesheet.json");
   Q.animations('player', {
-      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/15, flip: false, loop: true },
-      walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/15, flip: false, loop: true },
-      jump_right: { frames: [16], rate: 1/10, flip: false },
-      jump_left: { frames:  [17], rate: 1/10, flip: false },
-      fall_right: { frames:  [18], rate: 1/10, flip: false },
-      fall_left: { frames:  [19], rate: 1/10, flip: false },
-      stand_right: { frames:[3], rate: 1/10, flip: false },
-      stand_left: { frames: [11], rate: 1/10, flip: false },
+      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/8, flip: false, loop: true },
+      walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/8, flip: false, loop: true },
+      jump_right: { frames: [16], rate: 1/2, flip: false },
+      jump_left: { frames:  [17], rate: 1/2, flip: false },
+      fall_right: { frames:  [18], rate: 1/2, flip: false },
+      fall_left: { frames:  [19], rate: 1/2, flip: false },
+      stand_right: { frames:[2], rate: 1/2, flip: false },
+      stand_left: { frames: [10], rate: 1/2, flip: false },
     });
 
   // Finally, call stageScene to run the game
