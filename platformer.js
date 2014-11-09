@@ -71,6 +71,32 @@ Q.Sprite.extend("Player",{
 
   jumped: function(obj) {
     obj.p.playedJump = false;
+  },
+  
+  step: function(dt) {
+    var processed = false;
+      
+    if(!processed) { 
+      this.p.gravity = 1;
+
+        if(this.p.vx > 0) {
+          if(this.p.landed > 0) {
+            this.play("walk_right");
+          } else {
+            this.play("jump_right");
+          }
+          this.p.direction = "right";
+        } else if(this.p.vx < 0) {
+          if(this.p.landed > 0) {
+            this.play("walk_left");
+          } else {
+            this.play("jump_left");
+          }
+          this.p.direction = "left";
+        } else {
+          this.play("stand_" + this.p.direction);
+        }
+    }
   }
 
 });
@@ -205,7 +231,7 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
@@ -225,7 +251,7 @@ Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png,
 
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
-  Q.audio.play('Rick-astley.mp3',{ loop: true });
+  //Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
  
 // ## Possible Experimentations:
