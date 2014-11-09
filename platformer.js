@@ -56,6 +56,21 @@ Q.Sprite.extend("Player",{
       }
     });
 
+	this.on("jump");
+    this.on("jumped");
+
+  }
+  
+  jump: function(obj) {
+    // Only play sound once.
+    if (!obj.p.playedJump) {
+      Q.audio.play('jump.mp3');
+      obj.p.playedJump = true;
+    }
+  },
+
+  jumped: function(obj) {
+    obj.p.playedJump = false;
   }
 
 });
@@ -190,13 +205,23 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3, killenemy.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("sprites.png, sprites.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
 //Q.audio.play("Rick-astley.mp3",{ loop: true });
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("sprites.png","sprites.json");
+  Q.animations("player", {
+      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/15, flip: false, loop: true },
+      walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/15, flip: false, loop: true },
+      jump_right: { frames: [16], rate: 1/10, flip: false },
+      jump_left: { frames:  [17], rate: 1/10, flip: false },
+      fall_right: { frames:  [18], rate: 1/10, flip: false },
+      fall_left: { frames:  [19], rate: 1/10, flip: false },
+      stand_right: { frames:[3], rate: 1/10, flip: false },
+      stand_left: { frames: [11], rate: 1/10, flip: false },
+    });
 
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
