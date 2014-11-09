@@ -110,7 +110,7 @@ Q.UI.Text.extend("Lives",{
   init: function(p) {
     this._super({
       label: "Lives Remaining: 2",
-      x: Q.width - 85,
+      x: stage.viewport.x,
       y: 10,
       color: "white",
       size:16
