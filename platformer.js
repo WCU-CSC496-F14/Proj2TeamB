@@ -33,7 +33,8 @@ Q.Sprite.extend("Player",{
     this._super(p, {
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 90,           // You can also set additional properties that can
-      y: 1000             // be overridden on object creation
+      y: 1000,          // be overridden on object creation
+      direction: "right"
     });
 
     // Add in pre-made components to get up and running quickly
