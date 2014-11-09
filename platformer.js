@@ -83,14 +83,8 @@ Q.Sprite.extend("Enemy",{
     // end the game unless the enemy is hit on top
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
-      	if (Q.state.get("lives") == 0) {
-				Q.stageScene('loseGame');
-		}
-		else {
-			Q.state.dec("lives", 1);
-        	Q.stageScene("endGame",1, { label: "You Died" }); 
-        	collision.obj.destroy();
-        }
+        Q.stageScene("endGame",1, { label: "You Died" }); 
+        collision.obj.destroy();
       }
     });
 
@@ -106,32 +100,12 @@ Q.Sprite.extend("Enemy",{
   }
 });
 
-Q.UI.Text.extend("Lives",{ 
-  init: function(p) {
-    this._super({
-      label: "Lives Remaining: 2",
-      x: Q.width - 85,
-      y: 10,
-      color: "white",
-      size:16
-    });
-
-    Q.state.on("change.lives",this,"lives");
-  },
-
-  lives: function(lives) {
-    this.p.label = "Lives Remaining: " + lives;
-  }
-  });
-
 // ## Level1 scene
 // Create a new scene called level 1
 Q.scene("level1",function(stage) {
 
   // Add in a repeater for a little parallax action
   stage.insert(new Q.Repeater({ asset: "cavebackground.png", speedX: 0.5, speedY: 0.5 }));
-
-  stage.insert(new Q.Lives());
 
   // Add in a tile layer, and make it the collision layer
   stage.collisionLayer(new Q.TileLayer({
@@ -176,7 +150,6 @@ Q.scene('endGame',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.state.reset({ score: 0, lives: 2 });
     Q.stageScene('level1');
   });
 
