@@ -131,6 +131,8 @@ Q.scene("level1",function(stage) {
   // Add in a repeater for a little parallax action
   stage.insert(new Q.Repeater({ asset: "cavebackground.png", speedX: 0.5, speedY: 0.5 }));
 
+  stage.insert(new Q.Lives());
+
   // Add in a tile layer, and make it the collision layer
   stage.collisionLayer(new Q.TileLayer({
                              dataAsset: 'level.json',
