@@ -241,7 +241,7 @@ Q.load("spritesheet.png, spritesheet.json, level.json, newtiles.png, cavebackgro
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet.png","spritesheet.json");
   Q.animations('player', {
-      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/8, flip: false, loop: true },
+      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/3, flip: false, loop: true },
       walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/8, flip: false, loop: true },
       jump_right: { frames: [16], rate: 1/2, flip: false },
       jump_left: { frames:  [17], rate: 1/2, flip: false },
