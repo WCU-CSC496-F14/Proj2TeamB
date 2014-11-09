@@ -83,8 +83,14 @@ Q.Sprite.extend("Enemy",{
     // end the game unless the enemy is hit on top
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
-        Q.stageScene("endGame",1, { label: "You Died" }); 
-        collision.obj.destroy();
+      	if (Q.state.get("lives") == 0) {
+				Q.stageScene('loseGame');
+		}
+		else {
+			Q.state.dec("lives", 1);
+        	Q.stageScene("endGame",1, { label: "You Died" }); 
+        	collision.obj.destroy();
+        }
       }
     });
 
@@ -99,6 +105,24 @@ Q.Sprite.extend("Enemy",{
     });
   }
 });
+
+Q.UI.Text.extend("Lives",{ 
+  init: function(p) {
+    this._super({
+      label: "Lives Remaining: 2",
+      x: Q.width - 85,
+      y: 10,
+      color: "white",
+      size:16
+    });
+
+    Q.state.on("change.lives",this,"lives");
+  },
+
+  lives: function(lives) {
+    this.p.label = "Lives Remaining: " + lives;
+  }
+  });
 
 // ## Level1 scene
 // Create a new scene called level 1
@@ -150,6 +174,7 @@ Q.scene('endGame',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
+    Q.state.reset({ score: 0, lives: 2 });
     Q.stageScene('level1');
   });
 
