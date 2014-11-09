@@ -237,7 +237,7 @@ Q.load("spritesheet.png, sprites.json, level.json, newtiles.png, cavebackground.
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
 //Q.audio.play("Rick-astley.mp3",{ loop: true });
   // Or from a .json asset that defines sprite locations
-  Q.compileSheets("sprites.png","sprites.json");
+  Q.compileSheets("spritesheet.png","sprites.json");
   Q.animations("player", {
       walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/15, flip: false, loop: true },
       walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/15, flip: false, loop: true },
