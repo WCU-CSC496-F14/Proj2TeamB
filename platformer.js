@@ -34,7 +34,8 @@ Q.Sprite.extend("Player",{
       sprite: "player",
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 90,           // You can also set additional properties that can
-      y: 1000,          // be overridden on object creation
+      y: 1000, 
+	  on.// be overridden on object creation
       direction: "right"
     });
 
@@ -126,12 +127,13 @@ Q.Sprite.extend("Enemy",{
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
         Q.state.dec("lives",1);
+		
 		//this.destroy();
 		if(Q.state.get("lives") == 0) {
 			Q.stageScene("endGame",1, { label: "You Died" });
 				}else{
-		collision.obj.destroy();		
-		this.stage.insert(new Q.Player());
+		//collision.obj.destroy();		
+		//this.stage.insert(new Q.Player());
 		//stage.add("viewport").follow(player);
     }
 		//Q.stageScene("endGame",1, { label: "You Died" }); 
@@ -162,7 +164,7 @@ Q.Sprite.extend("Enemy",{
         align: "left",
   color: "white",
         x: 50,
-        y: Q.height - 10,
+        y: 0,
         weight: "normal",
         size:18
       });
@@ -182,7 +184,7 @@ Q.Sprite.extend("Enemy",{
         align: "left",
 		color: "white",
         x: 170,
-        y: Q.height - 10,
+        y: 0,
         weight: "normal",
         size:18
       });
@@ -373,6 +375,7 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
     });
 
   Q.scene('hud',function(stage) {
+  
   stage.insert(new Q.Score());
   stage.insert(new Q.Lives());
   });
