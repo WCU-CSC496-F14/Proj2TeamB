@@ -140,7 +140,51 @@ Q.Sprite.extend("Enemy",{
       }
     });
   }
+  
+  destroyed: function() {
+      Q.state.inc("score",10);
+ }
 });
+
+ Q.UI.Text.extend("Score",{
+    init: function() {
+      this._super({
+        label: "score: 0",
+        align: "left",
+  color: "white",
+        x: 50,
+        y: Q.height - 10,
+        weight: "normal",
+        size:18
+      });
+
+      Q.state.on("change.score",this,"score");
+    },
+
+    score: function(score) {
+      this.p.label = "score: " + score;
+    }
+  });
+  
+  Q.UI.Text.extend("Lives",{
+    init: function() {
+      this._super({
+        label: "lives: 3",
+        align: "left",
+		color: "white",
+        x: 170,
+        y: Q.height - 10,
+        weight: "normal",
+        size:18
+      });
+
+      Q.state.on("change.lives",this,"lives");
+    },
+
+    lives: function(lives) {
+      this.p.label = "lives: " + lives;
+    }
+  });
 
 // ## Level1 scene
 // Create a new scene called level 1
@@ -319,6 +363,10 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
       stand_left: { frames: [10], rate: 1/2, flip: false },
     });
 
+  Q.scene('hud',function(stage) {
+  stage.insert(new Q.Score());
+  stage.insert(new Q.Lives());
+  
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
   //Q.audio.play('Rick-astley.mp3',{ loop: true });
