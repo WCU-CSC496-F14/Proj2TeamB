@@ -52,9 +52,11 @@ Q.Sprite.extend("Player",{
     this.on("hit.sprite",function(collision) {
 
       // Check the collision, if it's the Tower, you win!
-      if(collision.obj.isA("Tower")) {
-        Q.stageScene("endGame",1, { label: "You Won!" }); 
-        this.destroy();
+	  //changed to if its a tower go to the next level
+      if(collision.obj.isA("Key")) {
+        //Q.stageScene("endGame",1, { label: "You Won!" }); 
+        //this.destroy();
+		this.stage.trigger("complete");
       }
     });
 
@@ -91,6 +93,11 @@ Q.Sprite.extend("Player",{
           this.play("stand_" + this.p.direction, 1);
         }
     }
+	//for level3, player dies if they fall too far
+	if(this.p.y > 1500) {
+    this.destroy();
+	Q.stageScene("endGame",1, { label: "You Died" });
+	}
   }
 
 });
@@ -144,7 +151,7 @@ Q.scene("level1",function(stage) {
 
   // Add in a tile layer, and make it the collision layer
   stage.collisionLayer(new Q.TileLayer({
-                             dataAsset: 'level.json',
+                             dataAsset: 'level1.json',
                              sheet:     'tiles' }));
 
 
@@ -163,11 +170,80 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Enemy({ x: 300, y: 950 }));
   stage.insert(new Q.Enemy({ x: 700, y: 700 }));
   stage.insert(new Q.Enemy({ x: 600, y: 400 }));
-  stage.insert(new Q.Enemy({ x: 500, y: 700 }));
 
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
+  stage.insert(new Q.Key({ x: 1130, y: 240 }));
+  stage.on("complete",function() { Q.stageScene("level2"); });
+  
 });
+
+//level2
+Q.scene("level2",function(stage) {
+
+  // Add in a repeater for a little parallax action
+  stage.insert(new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 }));
+
+  // Add in a tile layer, and make it the collision layer
+  stage.collisionLayer(new Q.TileLayer({
+                             dataAsset: 'level2.json',
+                             sheet:     'tiles' }));
+
+
+  // Create the player and add them to the stage
+  var player = stage.insert(new Q.Player());
+
+  // Give the stage a moveable viewport and tell it
+  // to follow the player.
+  stage.add("viewport").follow(player);
+  stage.viewport.scale = 2;
+
+  // Add in a couple of enemies
+  stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
+  stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
+  stage.insert(new Q.Enemy({ x: 300, y: 750 }));
+  stage.insert(new Q.Enemy({ x: 800, y: 1000 }));
+  stage.insert(new Q.Enemy({ x: 600, y: 800 }));
+
+  // Finally add in the tower goal
+  stage.insert(new Q.Key({ x: 1000, y: 800 }));
+  stage.on("complete",function() { Q.stageScene("level3"); });
+});
+
+//level3
+Q.scene("level3",function(stage) {
+
+  // Add in a repeater for a little parallax action
+  stage.insert(new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 }));
+
+  // Add in a tile layer, and make it the collision layer
+  stage.collisionLayer(new Q.TileLayer({
+                             dataAsset: 'level3.json',
+                             sheet:     'tiles' }));
+
+
+  // Create the player and add them to the stage
+  var player = stage.insert(new Q.Player());
+
+  // Give the stage a moveable viewport and tell it
+  // to follow the player.
+  stage.add("viewport").follow(player);
+  stage.viewport.scale = 2;
+
+  // Add in a couple of enemies
+  //stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
+  //stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
+  //stage.insert(new Q.Enemy({ x: 600, y: 900 }));
+  //stage.insert(new Q.Enemy({ x: 300, y: 950 }));
+  //stage.insert(new Q.Enemy({ x: 700, y: 700 }));
+  //stage.insert(new Q.Enemy({ x: 600, y: 400 }));
+ // stage.insert(new Q.Enemy({ x: 500, y: 700 }));
+
+  // Finally add in the tower goal
+  stage.insert(new Q.Key({ x: 800, y: 900 }));
+  stage.on("complete",function() { Q.stageScene("endGame",1, { label: "You Won!" }); });
+});
+
 
 // To display a game over / game won popup box, 
 // create a endGame scene that takes in a `label` option
@@ -225,7 +301,7 @@ Q.scene('title',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("spritesheet.png, spritesheet.json, level.json, newtiles.png, cavebackground.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json, newtiles.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
