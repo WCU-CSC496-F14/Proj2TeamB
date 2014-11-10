@@ -366,6 +366,7 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
   Q.scene('hud',function(stage) {
   stage.insert(new Q.Score());
   stage.insert(new Q.Lives());
+  });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
