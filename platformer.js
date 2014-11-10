@@ -81,10 +81,10 @@ Q.Sprite.extend("Player",{
     if(!processed) { 
       this.p.gravity = 1;
 
-        if(this.p.vx > 0) {
+        if(Q.inputs['right']) {
             this.play("walk_right");
           	this.p.direction = "right";
-        } else if(this.p.vx < 0) {
+        } else if(Q.inputs['left']) {
             this.play("walk_left");
           	this.p.direction = "left";
         } else {
