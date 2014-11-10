@@ -82,10 +82,10 @@ Q.Sprite.extend("Player",{
       this.p.gravity = 1;
 
         if(this.p.vx > 0) {
-            this.play("walk_right");
+            this.play("walk_right", 1);
           	this.p.direction = "right";
         } else if(this.p.vx < 0) {
-            this.play("walk_left");
+            this.play("walk_left", 1);
           	this.p.direction = "left";
         } else {
           this.play("stand_" + this.p.direction, 1);
@@ -98,9 +98,9 @@ Q.Sprite.extend("Player",{
 
 // ## Tower Sprite
 // Sprites can be simple, the Tower sprite just sets a custom sprite sheet
-Q.Sprite.extend("Tower", {
+Q.Sprite.extend("Key", {
   init: function(p) {
-    this._super(p, { sheet: 'tower' });
+    this._super(p, { sheet: 'key', sprite: 'key' });
   }
 });
 
