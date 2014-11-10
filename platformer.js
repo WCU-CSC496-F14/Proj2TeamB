@@ -126,13 +126,13 @@ Q.Sprite.extend("Enemy",{
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
         Q.state.dec("lives",1);
-		this.destroy();
+		//this.destroy();
 		if(Q.state.get("lives") == 0) {
 			Q.stageScene("endGame",1, { label: "You Died" });
 				}else{
 		collision.obj.destroy();		
 		this.stage.insert(new Q.Player());
-		stage.add("viewport").follow(player);
+		//stage.add("viewport").follow(player);
     }
 		//Q.stageScene("endGame",1, { label: "You Died" }); 
   
