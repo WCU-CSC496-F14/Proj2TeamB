@@ -35,7 +35,7 @@ Q.Sprite.extend("Player",{
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 90,           // You can also set additional properties that can
       y: 1000, 
-	  on.// be overridden on object creation
+// be overridden on object creation
       direction: "right"
     });
 
