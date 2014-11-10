@@ -132,6 +132,7 @@ Q.Sprite.extend("Enemy",{
 				}else{
 		collision.obj.destroy();		
 		this.stage.insert(new Q.Player());
+		stage.add("viewport").follow(player);
     }
 		//Q.stageScene("endGame",1, { label: "You Died" }); 
   
