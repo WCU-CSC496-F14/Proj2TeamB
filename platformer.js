@@ -82,19 +82,11 @@ Q.Sprite.extend("Player",{
       this.p.gravity = 1;
 
         if(this.p.vx > 0) {
-          if(this.p.landed > 0) {
             this.play("walk_right");
-          } else {
-            this.play("jump_right");
-          }
-          this.p.direction = "right";
+          	this.p.direction = "right";
         } else if(this.p.vx < 0) {
-          if(this.p.landed > 0) {
             this.play("walk_left");
-          } else {
-            this.play("jump_left");
-          }
-          this.p.direction = "left";
+          	this.p.direction = "left";
         } else {
           this.play("stand_" + this.p.direction, 1);
         }
