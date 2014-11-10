@@ -127,7 +127,7 @@ Q.Sprite.extend("Enemy",{
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
         Q.state.dec("lives",1);
-		
+		Q.stageScene("endGame",1, { label: "You Lose" });
 		//this.destroy();
 		if(Q.state.get("lives") < 1) {
 			Q.stageScene("endGame",1, { label: "You Lose" });
