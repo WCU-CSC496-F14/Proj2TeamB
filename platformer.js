@@ -125,8 +125,15 @@ Q.Sprite.extend("Enemy",{
     // end the game unless the enemy is hit on top
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
-        Q.stageScene("endGame",1, { label: "You Died" }); 
-        collision.obj.destroy();
+        Q.state.dec("lives",1);
+		this.destroy();
+		if(Q.state.get("lives") == 0) {
+			Q.stageScene("endGame",1, { label: "You Died" });
+				}else{
+    this.stage.insert(new Q.Player());
+    }
+		//Q.stageScene("endGame",1, { label: "You Died" }); 
+        //collision.obj.destroy();
       }
     });
 
@@ -206,7 +213,7 @@ Q.scene("level1",function(stage) {
   // to follow the player.
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
-
+  Q.reset({ score: 0, lives: 3 });
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
   stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
