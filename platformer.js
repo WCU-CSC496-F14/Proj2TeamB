@@ -139,7 +139,7 @@ Q.Sprite.extend("Enemy",{
         collision.obj.p.vy = -300;
       }
     });
-  }
+  },
   
   destroyed: function() {
       Q.state.inc("score",10);
