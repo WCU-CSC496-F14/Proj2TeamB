@@ -342,7 +342,7 @@ Q.scene('hud',function(stage) {
   
   var pointsLength = 4;
   
-  var score = Q.state.score;
+  var score = Q.state.get("score");
   
   var txt = "" + score;
   var i = pointsLength - txt.length, zeros = "";
