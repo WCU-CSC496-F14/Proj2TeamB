@@ -405,7 +405,7 @@ Q.scene('hud',function(stage) {
   
   txt = zeros + txt;
   
-  var label = container.insert(new Q.UI.Text({x:71, y: 45,
+  var label = container.insert(new Q.UI.Text({x:72, y: 45,
     label: "Score: " + txt, color: "white" }));
 
   var strength = container.insert(new Q.UI.Text({x:50, y: 20,
