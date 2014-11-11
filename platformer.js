@@ -56,7 +56,7 @@ Q.Sprite.extend("Player",{
 
       // Check the collision, if it's the Tower, you win!
 	  //changed to if its a tower go to the next level
-      if(collision.obj.isA("Key")) {
+      if(collision.obj.isA("Door")) {
         //Q.stageScene("endGame",1, { label: "You Won!" }); 
         //this.destroy();
 		this.stage.trigger("complete");
@@ -124,9 +124,9 @@ Q.Sprite.extend("Player",{
 
 // ## Tower Sprite
 // Sprites can be simple, the Tower sprite just sets a custom sprite sheet
-Q.Sprite.extend("Key", {
+Q.Sprite.extend("Door", {
   init: function(p) {
-    this._super(p, { sheet: 'key', sprite: 'key' });
+    this._super(p, { sheet: 'door', sprite: 'door' });
   }
 });
 
@@ -258,7 +258,7 @@ Q.scene("level1",function(stage) {
 
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
-  stage.insert(new Q.Key({ x: 1130, y: 240 }));
+  stage.insert(new Q.Door({ x: 1130, y: 240 }));
   stage.on("complete",function() { Q.stageScene("level2"); });
   
 });
@@ -291,7 +291,7 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Enemy({ x: 600, y: 800 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Key({ x: 1000, y: 800 }));
+  stage.insert(new Q.Door({ x: 1000, y: 800 }));
   stage.on("complete",function() { Q.stageScene("level3"); });
 });
 
@@ -325,7 +325,7 @@ Q.scene("level3",function(stage) {
  // stage.insert(new Q.Enemy({ x: 500, y: 700 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Key({ x: 800, y: 900 }));
+  stage.insert(new Q.Door({ x: 800, y: 900 }));
   stage.on("complete",function() { Q.stageScene("endGame",1, { label: "You Won!" }); });
 });
 
