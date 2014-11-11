@@ -79,7 +79,7 @@ Q.Sprite.extend("Player",{
   },
   
    resetLevel: function() {
-    Q.stageScene("level3");
+    Q.stageScene("level" + Q.state.get("level"));
     Q.stageScene('hud', 3, this.p);
   },
   
@@ -103,7 +103,7 @@ Q.Sprite.extend("Player",{
 	if(this.p.y > 1500) {
 		Q.state.dec("lives", 1);
 		Q.stageScene('hud', 3, this.p);
-		if (Q.state.get("lives") == 0) {
+		if (Q.state.get("lives") <= 0) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
@@ -145,8 +145,7 @@ Q.Sprite.extend("Enemy",{
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
 		else {
-			collision.obj.p.x = 90;
-			collision.obj.p.y = 1000;
+			collision.obj.resetLevel();
 		}
       }
     });
@@ -199,7 +198,10 @@ Q.scene("level1",function(stage) {
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
   stage.insert(new Q.Door({ x: 1130, y: 232 }));
-  stage.on("complete",function() { Q.stageScene("level2"); });
+  stage.on("complete",function() { 
+  	Q.state.inc("level", 1);
+    Q.stageScene("level" + Q.state.get("level")); 
+  });
   
 });
 
@@ -240,7 +242,10 @@ Q.scene("level2",function(stage) {
 
   // Finally add in the tower goal
    stage.insert(new Q.Door({ x: 1275, y: 10 }));
-  stage.on("complete",function() { Q.stageScene("level3"); });
+  stage.on("complete",function() { 
+  	Q.state.inc("level", 1);
+    Q.stageScene("level" + Q.state.get("level")); 
+  });
 });
 
 //level3
@@ -273,7 +278,9 @@ Q.scene("level3",function(stage) {
 
   // Finally add in the tower goal
   stage.insert(new Q.Door({ x: 160, y: 230 }));
-  stage.on("complete",function() { Q.stageScene("endGame",1, { label: "You Won!" }); });
+  stage.on("complete",function() { 
+  	Q.stageScene("endGame",1, { label: "You Won!" });
+  });
 });
 
 
@@ -376,7 +383,7 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
       stand_right: { frames:[2], rate: 1/1, flip: false },
       stand_left: { frames: [10], rate: 1/1, flip: false },
   });
-  Q.state.reset({ score: 0, lives: 3 });
+  Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
