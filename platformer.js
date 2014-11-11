@@ -139,7 +139,7 @@ Q.Sprite.extend("Enemy",{
       	collision.obj.p.lives--;
       	Q.stageScene('hud', 3, collision.obj.p);
       	if (collision.obj.p.lives == 0) {
-    		this.destroy();
+    		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
 		else {
@@ -380,7 +380,7 @@ Q.scene('hud',function(stage) {
     x: 50, y: 0
   }));
 
-  var label = container.insert(new Q.UI.Text({x:50, y: 100,
+  var label = container.insert(new Q.UI.Text({x:50, y: 40,
     label: "Score: " + stage.options.score, color: "white" }));
 
   var strength = container.insert(new Q.UI.Text({x:50, y: 20,
