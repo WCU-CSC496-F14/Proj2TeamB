@@ -100,7 +100,7 @@ Q.Sprite.extend("Player",{
 	if(this.p.y > 1500) {
 		this.p.lives--;
 		Q.stageScene('hud', 3, collision.obj.p);
-		if (this.p.lives == 0)
+		if (this.p.lives == 0) {
     		this.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
