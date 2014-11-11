@@ -289,9 +289,17 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Enemy({ x: 300, y: 750 }));
   stage.insert(new Q.Enemy({ x: 800, y: 1000 }));
   stage.insert(new Q.Enemy({ x: 600, y: 800 }));
+  stage.insert(new Q.Enemy({ x: 1100, y: 800 }));
+  stage.insert(new Q.Enemy({ x: 1500, y: 620 }));
+  stage.insert(new Q.Enemy({ x: 1400, y: 620 }));
+  stage.insert(new Q.Enemy({ x: 1700, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 800, y: 200 }));
+  stage.insert(new Q.Enemy({ x: 900, y: 100 }));
+  stage.insert(new Q.Enemy({ x: 1400, y: 420 }));
+  stage.insert(new Q.Enemy({ x: 1700, y: 300 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Door({ x: 1000, y: 800 }));
+   stage.insert(new Q.Door({ x: 1275, y: 10 }));
   stage.on("complete",function() { Q.stageScene("level3"); });
 });
 
@@ -316,16 +324,15 @@ Q.scene("level3",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
-  //stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
-  //stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
-  //stage.insert(new Q.Enemy({ x: 600, y: 900 }));
-  //stage.insert(new Q.Enemy({ x: 300, y: 950 }));
-  //stage.insert(new Q.Enemy({ x: 700, y: 700 }));
-  //stage.insert(new Q.Enemy({ x: 600, y: 400 }));
- // stage.insert(new Q.Enemy({ x: 500, y: 700 }));
+  stage.insert(new Q.Enemy({ x: 500, y: 100 }));
+  stage.insert(new Q.Enemy({ x: 700, y: 100 }));
+  stage.insert(new Q.Enemy({ x: 800, y: 100 }));
+  stage.insert(new Q.Enemy({ x: 300, y: 200 }));
+  stage.insert(new Q.Enemy({ x: 900, y: 300 }));
+  stage.insert(new Q.Enemy({ x: 600, y: 400 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Door({ x: 800, y: 900 }));
+  stage.insert(new Q.Door({ x: 160, y: 200 }));
   stage.on("complete",function() { Q.stageScene("endGame",1, { label: "You Won!" }); });
 });
 
