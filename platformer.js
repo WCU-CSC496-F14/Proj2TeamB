@@ -220,7 +220,7 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Enemy({ x: 1700, y: 300 }));
 
   // Finally add in the tower goal
-   stage.insert(new Q.Door({ x: 1300, y: 10 }));
+   stage.insert(new Q.Door({ x: 1275, y: 10 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
     Q.stageScene("level3"); 
@@ -248,15 +248,15 @@ Q.scene("level3",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
-  stage.insert(new Q.Enemy({ x: 500, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 700, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 800, y: 100 }));
+  //stage.insert(new Q.Enemy({ x: 500, y: 100 }));
+  //stage.insert(new Q.Enemy({ x: 700, y: 100 }));
+  //stage.insert(new Q.Enemy({ x: 800, y: 100 }));
   stage.insert(new Q.Enemy({ x: 300, y: 200 }));
   stage.insert(new Q.Enemy({ x: 900, y: 300 }));
   stage.insert(new Q.Enemy({ x: 600, y: 400 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Door({ x: 160, y: 230 }));
+  stage.insert(new Q.Door({ x: 110, y: 232 }));
   stage.on("complete",function() { 
   	Q.stageScene("endGame",1, { label: "You Won!" });
   });
@@ -305,7 +305,7 @@ Q.scene('title',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.stageScene('level1');
+    Q.stageScene('level3');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
@@ -324,19 +324,22 @@ Q.scene('hud',function(stage) {
   
   var pointsLength = 4;
   
-  var score = Q.state.get("score");
+  var value = Q.state.get("score");
   
-  var txt = "" + score;
+  var txt = "" + value;
   var i = pointsLength - txt.length, zeros = "";
   while(i-- > 0) { zeros += "0"; }
   
   txt = zeros + txt;
   
-  var label = container.insert(new Q.UI.Text({x:72, y: 45,
+  var score = container.insert(new Q.UI.Text({x:72, y: 20,
     label: "Score: " + txt, color: "white" }));
 
-  var strength = container.insert(new Q.UI.Text({x:50, y: 20,
+  var lives = container.insert(new Q.UI.Text({x:50, y: 70,
     label: "Lives: " + Q.state.get("lives"), color: "white" }));
+    
+  var level = container.insert(new Q.UI.Text({x:50, y: 45,
+    label: "Level: " + Q.state.get("level"), color: "white" }));
 
   container.fit(20);
 });
