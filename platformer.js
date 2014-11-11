@@ -332,7 +332,7 @@ Q.scene("level3",function(stage) {
   stage.insert(new Q.Enemy({ x: 600, y: 400 }));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Door({ x: 160, y: 200 }));
+  stage.insert(new Q.Door({ x: 160, y: 230 }));
   stage.on("complete",function() { Q.stageScene("endGame",1, { label: "You Won!" }); });
 });
 
