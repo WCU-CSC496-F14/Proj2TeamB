@@ -248,9 +248,7 @@ Q.scene("level3",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
-  //stage.insert(new Q.Enemy({ x: 500, y: 100 }));
   stage.insert(new Q.Enemy({ x: 700, y: 100 }));
-  //stage.insert(new Q.Enemy({ x: 800, y: 100 }));
   stage.insert(new Q.Enemy({ x: 300, y: 200 }));
   stage.insert(new Q.Enemy({ x: 900, y: 300 }));
   stage.insert(new Q.Enemy({ x: 600, y: 400 }));
@@ -258,7 +256,7 @@ Q.scene("level3",function(stage) {
   // Finally add in the tower goal
   stage.insert(new Q.Door({ x: 55, y: 232 }));
   stage.on("complete",function() { 
-  	Q.stageScene("endGame",1, { label: "You Won!" });
+  	Q.stageScene("title",1, { label: "You Won!", text: "Play Again" });
   });
 });
 
@@ -298,7 +296,7 @@ Q.scene('title',function(stage) {
   }));
 
   var button = container.insert(new Q.UI.Button({ x: 0, y: 0, fill: "#FFFFFF",
-                                                  label: "Play" }))         
+                                                  label: stage.options.text }))         
   var label = container.insert(new Q.UI.Text({x:10, y: -20 - button.p.h, 
                                                    label: stage.options.label, color: "white" }));
   // When the button is clicked, clear all the stages
@@ -368,7 +366,7 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
   Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
-  Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
+  Q.stageScene("title",1, { label: "Super Awesome Platformer", text: "Play" }); 
   Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
 });
