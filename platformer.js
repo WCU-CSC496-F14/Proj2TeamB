@@ -104,7 +104,7 @@ Q.Sprite.extend("Player",{
 		Q.state.dec("lives", 1);
 		Q.stageScene('hud', 3, this.p);
 		if (Q.state.get("lives") <= 0) {
-    		collision.obj.destroy();
+    		this.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
 		else {
