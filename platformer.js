@@ -1,17 +1,4 @@
-// # Quintus platformer example
-//
-// [Run the example](../quintus/examples/platformer/index.html)
-// WARNING: this game must be run from a non-file:// url
-// as it loads a level json file.
-//
-// This is the example from the website homepage, it consists
-// a simple, non-animated platformer with some enemies and a 
-// target for the player.
 window.addEventListener("load",function() {
-
-// Set up an instance of the Quintus engine  and include
-// the Sprites, Scenes, Input and 2D module. The 2D module
-// includes the `TileLayer` class as well as the `2d` componet.
 
 var Q = window.Q = Quintus({ audioSupported: [ 'mp3','ogg' ] })//{audioSupported: ['mp3']}
         .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI, Audio")
@@ -22,8 +9,6 @@ var Q = window.Q = Quintus({ audioSupported: [ 'mp3','ogg' ] })//{audioSupported
         .controls().touch().enableSound();//
 
 // ## Player Sprite
-// The very basic player sprite, this is just a normal sprite
-// using the player sprite sheet with default controls added to it.
 Q.Sprite.extend("Player",{
 
   // the init constructor is called on creation
@@ -33,9 +18,8 @@ Q.Sprite.extend("Player",{
     this._super(p, {
       sprite: "player",
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
-      x: 90,           // You can also set additional properties that can
+      x: 90,
       y: 1000, 
-// be overridden on object creation
       direction: "right",
     });
 
@@ -52,11 +36,8 @@ Q.Sprite.extend("Player",{
     // hit.sprite is called everytime the player collides with a sprite
     this.on("hit.sprite",function(collision) {
 
-      // Check the collision, if it's the Tower, you win!
-	  //changed to if its a tower go to the next level
+      // Check the collision, if it's the Door, you win!
       if(collision.obj.isA("Door")) {
-        //Q.stageScene("endGame",1, { label: "You Won!" }); 
-        //this.destroy();
 		this.stage.trigger("complete");
       }
     });
@@ -116,8 +97,7 @@ Q.Sprite.extend("Player",{
 });
 
 
-// ## Tower Sprite
-// Sprites can be simple, the Tower sprite just sets a custom sprite sheet
+// ## Door Sprite
 Q.Sprite.extend("Door", {
   init: function(p) {
     this._super(p, { sheet: 'door', sprite: 'door' });
@@ -195,12 +175,11 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Enemy({ x: 700, y: 700 }));
   stage.insert(new Q.Enemy({ x: 600, y: 400 }));
 
-  // Finally add in the tower goal
-  //stage.insert(new Q.Tower({ x: 180, y: 50 }));
+  // Finally add in the door goal
   stage.insert(new Q.Door({ x: 1130, y: 232 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
-    Q.stageScene("level" + Q.state.get("level")); 
+    Q.stageScene("level2"); 
   });
   
 });
@@ -241,10 +220,10 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Enemy({ x: 1700, y: 300 }));
 
   // Finally add in the tower goal
-   stage.insert(new Q.Door({ x: 1275, y: 10 }));
+   stage.insert(new Q.Door({ x: 1300, y: 10 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
-    Q.stageScene("level" + Q.state.get("level")); 
+    Q.stageScene("level3"); 
   });
 });
 
@@ -300,7 +279,7 @@ Q.scene('endGame',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.state.reset({ score: 0, lives: 3 });
+    Q.state.reset({ score: 0, lives: 3, level: 1 });
     Q.stageScene('level1');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
