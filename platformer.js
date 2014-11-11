@@ -36,7 +36,9 @@ Q.Sprite.extend("Player",{
       x: 90,           // You can also set additional properties that can
       y: 1000, 
 // be overridden on object creation
-      direction: "right"
+      direction: "right",
+      score: 0,
+      lives: 2,
     });
 
     // Add in pre-made components to get up and running quickly
@@ -96,8 +98,16 @@ Q.Sprite.extend("Player",{
     }
 	//for level3, player dies if they fall too far
 	if(this.p.y > 1500) {
-    this.destroy();
-	Q.stageScene("endGame",1, { label: "You Died" });
+		this.p.lives--;
+		Q.stageScene('hud', 3, collision.obj.p);
+		if (this.p.lives == 0)
+    		this.destroy();
+			Q.stageScene("endGame",1, { label: "You Died" });
+		}
+		else {
+			this.x = 90;
+			this.y = 1000;
+		}
 	}
   }
 
@@ -126,12 +136,22 @@ Q.Sprite.extend("Enemy",{
     // end the game unless the enemy is hit on top
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
-        Q.state.dec("lives",1);
-		Q.stageScene("endGame",1, { label: "You Lose" });
+      	collision.obj.p.lives--;
+      	Q.stageScene('hud', 3, collision.obj.p);
+      	if (this.p.lives == 0)
+    		this.destroy();
+			Q.stageScene("endGame",1, { label: "You Died" });
+		}
+		else {
+			collision.obj.p.x = 90;
+			collision.obj.p.y = 1000;
+		}
+        //Q.state.dec("lives",1);
+		//Q.stageScene("endGame",1, { label: "You Lose" });
 		//this.destroy();
-		if(Q.state.get("lives") < 1) {
-			Q.stageScene("endGame",1, { label: "You Lose" });
-				}
+		//if(Q.state.get("lives") < 1) {
+		//	Q.stageScene("endGame",1, { label: "You Lose" });
+		//		}
 		//collision.obj.destroy();		
 		//this.stage.insert(new Q.Player());
 		//stage.add("viewport").follow(player);
@@ -148,16 +168,18 @@ Q.Sprite.extend("Enemy",{
         this.destroy();
         Q.audio.play('killenemy.mp3');
         collision.obj.p.vy = -300;
+        collision.obj.p.score += 100;
+        Q.stageScene('hud', 3, collision.obj.p);
       }
     });
   },
   
   destroyed: function() {
-      Q.state.inc("score",10);
+      //Q.state.inc("score",10);
  }
 });
 
- Q.UI.Text.extend("Score",{
+ /*Q.UI.Text.extend("Score",{
     init: function() {
       this._super({
         label: "score: 0",
@@ -195,7 +217,7 @@ Q.Sprite.extend("Enemy",{
     lives: function(lives) {
       this.p.label = "lives: " + lives;
     }
-  });
+  });*/
 
 // ## Level1 scene
 // Create a new scene called level 1
@@ -217,7 +239,7 @@ Q.scene("level1",function(stage) {
   // to follow the player.
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
-  Q.reset({ score: 0, lives: 3 });
+  //Q.reset({ score: 0, lives: 3 });
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
   stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
@@ -317,6 +339,7 @@ Q.scene('endGame',function(stage) {
   button.on("click",function() {
     Q.clearStages();
     Q.stageScene('level1');
+    Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
   // Expand the container to visibily fit it's contents
@@ -351,6 +374,20 @@ Q.scene('title',function(stage) {
   stage.viewport.scale = 2;
 });
 
+Q.scene('hud',function(stage) {
+  var container = stage.insert(new Q.UI.Container({
+    x: 50, y: 0
+  }));
+
+  var label = container.insert(new Q.UI.Text({x:200, y: 20,
+    label: "Score: " + stage.options.score, color: "white" }));
+
+  var strength = container.insert(new Q.UI.Text({x:50, y: 20,
+    label: "Lives: " + stage.options.lives, color: "white" }));
+
+  container.fit(20);
+});
+
 // ## Asset Loading and Game Launch
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
@@ -374,11 +411,11 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
       stand_left: { frames: [10], rate: 1/1, flip: false },
     });
 
-  Q.scene('hud',function(stage) {
+  /*Q.scene('hud',function(stage) {
   
   stage.insert(new Q.Score());
   stage.insert(new Q.Lives());
-  });
+  });*/
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
