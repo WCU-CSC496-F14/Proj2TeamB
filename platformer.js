@@ -99,8 +99,8 @@ Q.Sprite.extend("Player",{
 	//for level3, player dies if they fall too far
 	if(this.p.y > 1500) {
 		this.p.lives--;
-		Q.stageScene("endGame",1, { label: "You Died" });
-		Q.stageScene('hud', 3, collision.obj.p);
+		//Q.stageScene("endGame",1, { label: "You Died" });
+		//Q.stageScene('hud', 3, collision.obj.p);
 		if (this.p.lives == 0) {
     		this.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
