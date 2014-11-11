@@ -80,6 +80,12 @@ Q.Sprite.extend("Player",{
     obj.p.playedJump = false;
   },
   
+   resetLevel: function() {
+    Q.stageScene("level3");
+    this.p.lives = 3;
+    Q.stageScene('hud', 3, this.p);
+  },
+  
   step: function(dt) {
     var processed = false;
       
@@ -98,17 +104,18 @@ Q.Sprite.extend("Player",{
     }
 	//for level3, player dies if they fall too far
 	if(this.p.y > 1500) {
-		this.p.lives--;
+		this.resetLevel();
+		//this.p.lives--;
 		//Q.stageScene("endGame",1, { label: "You Died" });
-		Q.stageScene('hud', 3, this.p);
-		if (this.p.lives == 0) {
-    		this.destroy();
-			Q.stageScene("endGame",1, { label: "You Died" });
-		}
-		else {
-			this.x = 90;
-			this.y = 1000;
-		}
+		//Q.stageScene('hud', 3, this.p);
+		//if (this.p.lives == 0) {
+    		//this.destroy();
+			//Q.stageScene("endGame",1, { label: "You Died" });
+		//}
+		//else {
+			//this.x = 90;
+			//this.y = 1000;
+		//}
 	}
   }
 
