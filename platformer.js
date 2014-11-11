@@ -303,7 +303,7 @@ Q.scene('title',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.stageScene('level3');
+    Q.stageScene('level1');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
