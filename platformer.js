@@ -37,8 +37,6 @@ Q.Sprite.extend("Player",{
       y: 1000, 
 // be overridden on object creation
       direction: "right",
-      score: 0,
-      lives: 3,
     });
 
     // Add in pre-made components to get up and running quickly
@@ -82,7 +80,6 @@ Q.Sprite.extend("Player",{
   
    resetLevel: function() {
     Q.stageScene("level3");
-    //this.p.lives = 3;
     Q.stageScene('hud', 3, this.p);
   },
   
@@ -105,9 +102,10 @@ Q.Sprite.extend("Player",{
 	//for level3, player dies if they fall too far
 	if(this.p.y > 1500) {
 		this.resetLevel();
+		Q.state.dec("lives", 1);
 		//this.p.lives--;
 		//Q.stageScene("endGame",1, { label: "You Died" });
-		//Q.stageScene('hud', 3, this.p);
+		Q.stageScene('hud', 3, this.p);
 		//if (this.p.lives == 0) {
     		//this.destroy();
 			//Q.stageScene("endGame",1, { label: "You Died" });
@@ -144,9 +142,9 @@ Q.Sprite.extend("Enemy",{
     // end the game unless the enemy is hit on top
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
-      	collision.obj.p.lives--;
+      	Q.state.dec("lives", 1);
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (collision.obj.p.lives == 0) {
+      	if (Q.state.get("lives") == 0) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
@@ -154,18 +152,6 @@ Q.Sprite.extend("Enemy",{
 			collision.obj.p.x = 90;
 			collision.obj.p.y = 1000;
 		}
-        //Q.state.dec("lives",1);
-		//Q.stageScene("endGame",1, { label: "You Lose" });
-		//this.destroy();
-		//if(Q.state.get("lives") < 1) {
-		//	Q.stageScene("endGame",1, { label: "You Lose" });
-		//		}
-		//collision.obj.destroy();		
-		//this.stage.insert(new Q.Player());
-		//stage.add("viewport").follow(player);
-    
-		//Q.stageScene("endGame",1, { label: "You Died" }); 
-  
       }
     });
 
@@ -176,56 +162,15 @@ Q.Sprite.extend("Enemy",{
         this.destroy();
         Q.audio.play('killenemy.mp3');
         collision.obj.p.vy = -300;
-        collision.obj.p.score += 100;
+        Q.state.inc('score', 100);
         Q.stageScene('hud', 3, collision.obj.p);
       }
     });
   },
   
   destroyed: function() {
-      //Q.state.inc("score",10);
  }
 });
-
- /*Q.UI.Text.extend("Score",{
-    init: function() {
-      this._super({
-        label: "score: 0",
-        align: "left",
-  color: "white",
-        x: 50,
-        y: 0,
-        weight: "normal",
-        size:18
-      });
-
-      Q.state.on("change.score",this,"score");
-    },
-
-    score: function(score) {
-      this.p.label = "score: " + score;
-    }
-  });
-  
-  Q.UI.Text.extend("Lives",{
-    init: function() {
-      this._super({
-        label: "lives: 3",
-        align: "left",
-		color: "white",
-        x: 170,
-        y: 0,
-        weight: "normal",
-        size:18
-      });
-
-      Q.state.on("change.lives",this,"lives");
-    },
-
-    lives: function(lives) {
-      this.p.label = "lives: " + lives;
-    }
-  });*/
 
 // ## Level1 scene
 // Create a new scene called level 1
@@ -247,7 +192,6 @@ Q.scene("level1",function(stage) {
   // to follow the player.
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
-  //Q.reset({ score: 0, lives: 3 });
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
   stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
@@ -353,6 +297,7 @@ Q.scene('endGame',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
+    Q.state.reset({ score: 0, lives: 3 });
     Q.stageScene('level1');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
@@ -397,7 +342,7 @@ Q.scene('hud',function(stage) {
   
   var pointsLength = 4;
   
-  var score = stage.options.score;
+  var score = Q.state.score;
   
   var txt = "" + score;
   var i = pointsLength - txt.length, zeros = "";
@@ -409,7 +354,7 @@ Q.scene('hud',function(stage) {
     label: "Score: " + txt, color: "white" }));
 
   var strength = container.insert(new Q.UI.Text({x:50, y: 20,
-    label: "Lives: " + stage.options.lives, color: "white" }));
+    label: "Lives: " + Q.state.get("lives"), color: "white" }));
 
   container.fit(20);
 });
@@ -423,7 +368,6 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
-//Q.audio.play("Rick-astley.mp3",{ loop: true });
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet.png","spritesheet.json");
   Q.animations('player', {
@@ -435,28 +379,11 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
       fall_left: { frames:  [19], rate: 1/1, flip: false },
       stand_right: { frames:[2], rate: 1/1, flip: false },
       stand_left: { frames: [10], rate: 1/1, flip: false },
-    });
-
-  /*Q.scene('hud',function(stage) {
-  
-  stage.insert(new Q.Score());
-  stage.insert(new Q.Lives());
-  });*/
+  });
+  Q.state.reset({ score: 0, lives: 3 });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
-  //Q.audio.play('Rick-astley.mp3',{ loop: true });
+  Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
- 
-// ## Possible Experimentations:
-// 
-// The are lots of things to try out here.
-// 
-// 1. Modify level.json to change the level around and add in some more enemies.
-// 2. Add in a second level by creating a level2.json and a level2 scene that gets
-//    loaded after level 1 is complete.
-// 3. Add in a title screen
-// 4. Add in a hud and points for jumping on enemies.
-// 5. Add in a `Repeater` behind the TileLayer to create a paralax scrolling effect.
-
 });
