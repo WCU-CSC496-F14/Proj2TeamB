@@ -82,7 +82,7 @@ Q.Sprite.extend("Player",{
   
    resetLevel: function() {
     Q.stageScene("level3");
-    this.p.lives = 3;
+    //this.p.lives = 3;
     Q.stageScene('hud', 3, this.p);
   },
   
