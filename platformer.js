@@ -368,7 +368,7 @@ Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json
   Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
-  Q.stageScene("title",1, { label: "Super Awesome Platformer", text: "Play" }); 
+  Q.stageScene("title",1, { label: "Project Number B", text: "Play" }); 
   Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
 });
