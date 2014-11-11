@@ -179,6 +179,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Door({ x: 1130, y: 232 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
+  	Q.stageScene('hud', 3, Q('Player').first().p);
     Q.stageScene("level2"); 
   });
   
@@ -223,6 +224,7 @@ Q.scene("level2",function(stage) {
    stage.insert(new Q.Door({ x: 1275, y: 10 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
+  	Q.stageScene('hud', 3, Q('Player').first().p);
     Q.stageScene("level3"); 
   });
 });
