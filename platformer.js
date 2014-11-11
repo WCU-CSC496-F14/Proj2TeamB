@@ -38,7 +38,7 @@ Q.Sprite.extend("Player",{
 // be overridden on object creation
       direction: "right",
       score: 0,
-      lives: 2,
+      lives: 3,
     });
 
     // Add in pre-made components to get up and running quickly
@@ -138,7 +138,7 @@ Q.Sprite.extend("Enemy",{
       if(collision.obj.isA("Player")) { 
       	collision.obj.p.lives--;
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (this.p.lives == 0) {
+      	if (collision.obj.p.lives == 0) {
     		this.destroy();
 			Q.stageScene("endGame",1, { label: "You Died" });
 		}
@@ -364,6 +364,7 @@ Q.scene('title',function(stage) {
   button.on("click",function() {
     Q.clearStages();
     Q.stageScene('level1');
+    Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
   // Expand the container to visibily fit it's contents
@@ -379,7 +380,7 @@ Q.scene('hud',function(stage) {
     x: 50, y: 0
   }));
 
-  var label = container.insert(new Q.UI.Text({x:200, y: 20,
+  var label = container.insert(new Q.UI.Text({x:50, y: 100,
     label: "Score: " + stage.options.score, color: "white" }));
 
   var strength = container.insert(new Q.UI.Text({x:50, y: 20,
