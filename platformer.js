@@ -212,12 +212,12 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Enemy({ x: 800, y: 1000 }));
   stage.insert(new Q.Enemy({ x: 600, y: 800 }));
   stage.insert(new Q.Enemy({ x: 1100, y: 800 }));
-  //stage.insert(new Q.Enemy({ x: 1500, y: 620 }));
+  stage.insert(new Q.Enemy({ x: 1500, y: 620 }));
   stage.insert(new Q.Enemy({ x: 1400, y: 620 }));
   stage.insert(new Q.Enemy({ x: 1700, y: 500 }));
   stage.insert(new Q.Enemy({ x: 800, y: 200 }));
   stage.insert(new Q.Enemy({ x: 900, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 1400, y: 420 }));
+  //stage.insert(new Q.Enemy({ x: 1400, y: 420 }));
   stage.insert(new Q.Enemy({ x: 1700, y: 300 }));
 
   // Finally add in the tower goal
