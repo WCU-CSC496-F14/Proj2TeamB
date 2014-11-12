@@ -218,7 +218,6 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Enemy({ x: 800, y: 200 }));
   stage.insert(new Q.Enemy({ x: 900, y: 100 }));
   stage.insert(new Q.Enemy({ x: 1400, y: 420 }));
-  //stage.insert(new Q.Enemy({ x: 1700, y: 300 }));
 
   // Finally add in the tower goal
    stage.insert(new Q.Door({ x: 1275, y: 10 }));
@@ -306,7 +305,7 @@ Q.scene('title',function(stage) {
   button.on("click",function() {
     Q.clearStages();
     Q.state.reset({ score: 0, lives: 3, level: 1 });
-    Q.stageScene('level2');
+    Q.stageScene('level1');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
